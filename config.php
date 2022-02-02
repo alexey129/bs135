@@ -1,15 +1,19 @@
 <?php
-define("SITE_PATH", "http://bs135/");
+define("BS_SITE_URL", "http://" . $_SERVER['SERVER_NAME'] . "/");
+define("BS_SITE_PATH", $_SERVER['DOCUMENT_ROOT']);
 
 //константы для базы данных
-/*define("HOST", "localhost");
-define("PORT", "5432");
-define("DBNAME", "bs135");
-define("USER", "postgres");
-define("PASSWORD", "password");*/
 
-define("HOST", "ec2-3-227-15-75.compute-1.amazonaws.com");
-define("PORT", "5432");
-define("DBNAME", "da0mrntn88a3vi");
-define("USER", "fnhbktcfomqyqc");
-define("PASSWORD", "ef91e3b2d02efa2c0cc9f6c243462f03aa66e63965241c5f1b424d0efc54fa74");
+if($_SERVER['SERVER_NAME'] == "bs135"){
+    //локально
+    define("HOST", "localhost");
+    define("DBNAME", "bs135");
+    define("USER", "root");
+    define("PASSWORD", "qwertyuiop[]");
+} else {
+    //на хостинге
+    define("HOST", "localhost");
+    define("DBNAME", "g90895yr_wp1");
+    define("USER", "g90895yr_wp1");
+    define("PASSWORD", "Rl17XH*G");
+}

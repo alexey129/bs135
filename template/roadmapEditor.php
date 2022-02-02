@@ -9,8 +9,8 @@ function roadmapEditor(){
             <?php
             global $dbconn;
     		$sql = 'SELECT id, name FROM playlists';
-    		$result = pg_query($dbconn, $sql);
-    		while ($row = pg_fetch_row($result)) {
+    		$result = mysqli_query($dbconn, $sql);
+    		while ($row = mysqli_fetch_array($result)) {
     			?>
                 <div class="roadmap-editor__playlists-list-item" data-select="false" data-id="<?php echo $row[0];?>">
                     <?php
@@ -47,7 +47,6 @@ function roadmapEditor(){
 </section>
 
 <script>
-
 let playlist = document.querySelector('.roadmap-editor__playlists-list');
 let playlistsText = document.querySelector('.roadmap-editor__playlists-buttons .text-area');
 let playlistsAdd = document.querySelector('.roadmap-editor__playlists-buttons .add');
@@ -126,7 +125,7 @@ playlistsAdd.onclick = (event) => {
 				for(let item in data){
 					//добавляем полученные посты в список постов
                     let aaa = data[item];
-	                playlist.innerHTML += `<div class="list-item"
+	                playlist.innerHTML += `<div class="roadmap-editor__playlists-list-item"
                                             data-select="false"
                                             data-id="`+ aaa[0] +`">` +
 					                        aaa[1] + `</div>`;
@@ -160,7 +159,7 @@ playlistsDelete.onclick = (event) => {
                 for(let item in data){
 					//добавляем полученные посты в список постов
                     let aaa = data[item];
-	                playlist.innerHTML += `<div class="list-item"
+	                playlist.innerHTML += `<div class="roadmap-editor__playlists-list-item"
                                             data-select="false"
                                             data-id="`+ aaa[0] +`">` +
 					                        aaa[1] + `</div>`;

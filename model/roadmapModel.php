@@ -2,15 +2,14 @@
 class roadmapModel{
 	//получает данные плейлиста, указанного в GET параметрах
 	public function getPlaylist(){
-		$playlist = $_GET["playlist"];
 		global $dbconn;
-		$sql = 'SELECT id, name, cards FROM playlists';
-		$result = pg_query($dbconn, $sql);
-		while ($row = pg_fetch_row($result)) {
-			if($row[0] == $playlist){
-				return ["id"    => $row[0],
-						"name"  => $row[1],
-						"cards" => $row[2],
+		$playlist = $_GET["playlist"];
+		$result = mysqli_query($dbconn,"SELECT id, name, cards FROM playlists");
+		while ($row = mysqli_fetch_array($result)) {
+			if($row["id"] == $playlist){
+				return ["id"    => $row["id"],
+						"name"  => $row["name"],
+						"cards" => $row["cards"],
 					   ];
 			}
 		}
@@ -19,17 +18,16 @@ class roadmapModel{
 
 	//возвращает массив с карточками указанными в $cardsList
 	public function getCards($cardsList){
-		$list = explode(",", $cardsList);
 		global $dbconn;
-		$sql = 'SELECT id, name, content FROM cards';
-		$result = pg_query($dbconn, $sql);
+		$list = explode(",", $cardsList);
+		$result = mysqli_query($dbconn,"SELECT id, name, content FROM cards");
 		$resCards = [];
-		while($row = pg_fetch_row($result)){
+		while($row = mysqli_fetch_array($result)){
 			foreach($list as &$value){
-				if($row[0] == $value){
-					$resCards[] = ["id"    => $row[0],
-								   "name"  => $row[1],
-								   "content" => $row[2],
+				if($row["id"] == $value){
+					$resCards[] = ["id"    => $row["id"],
+								   "name"  => $row["name"],
+								   "content" => $row["content"],
 						   		  ];
 				}
 			}

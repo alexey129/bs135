@@ -2,6 +2,7 @@
 require_once './template/blogEditor.php';
 require_once './template/roadmap.php';
 require_once './template/roadmapEditor.php';
+require_once './config.php';
 
 function headerTemplate(){
 	?>
@@ -49,7 +50,8 @@ function footerTemplate(){
 }
 
 function loginTemplate($name){
-	if($name == ''){
+	echo $name;
+	if($name == ""){
 		?>
 		<form class="login-form" action="/script/login.php" method="post" id="formLogin">
 			<div class="lable">Введите имя</div>
@@ -65,7 +67,7 @@ function loginTemplate($name){
 			}
 			?></form><?php
 	} else {
-		header("Location: " . SITE_PATH . "admin");
+		header("Location: " . BS_SITE_URL . "admin");
 	}
 }
 

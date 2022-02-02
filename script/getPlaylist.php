@@ -1,21 +1,11 @@
 <?php
-$_POST = json_decode(file_get_contents('php://input'), true);
-$nameInput = $_POST['name'];
-$dbconn = pg_connect("host=localhost
-					  port=5432
-					  dbname=bs135
-					  user=postgres
-					  password=password
-					");
+require_once '../config.php';
+require_once BS_SITE_PATH . '/function.php';
 
-$sql = 'SELECT id, name FROM playlists';
-$result = pg_query($dbconn, $sql);
-$res = [];
-while ($row = pg_fetch_row($result)) {
-	$resItem = [];
-	$resItem[] = $row[0];
-	$resItem[] = $row[1];
-    $res[] = $resItem;
-};
+$_POST = json_decode(file_get_contents('php://input'), true);
+$dbconn = mysqli_connect(HOST, USER, PASSWORD, DBNAME);
+
+$res = getPlaylist($_POST['name']);
+
 echo json_encode($res);
 ?>

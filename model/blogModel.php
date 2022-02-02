@@ -14,13 +14,12 @@ class blogModel{
 	}
 	public function getPosts(){
 		global $dbconn;
-		$sql = "SELECT id, name, content FROM posts";
-		$result = pg_query($dbconn, $sql);
-		while ($row = pg_fetch_row($result)) {
+		$result = mysqli_query($dbconn, "SELECT id, name, content FROM posts");
+		while ($row = mysqli_fetch_array($result)) {
 			$item = new Post();
-			$item->id = $row[0];
-			$item->name = $row[1];
-			$item->content = $row[2];
+			$item->id = $row["id"];
+			$item->name = $row["name"];
+			$item->content = $row["content"];
 			$this->posts[] = $item;
 		}
 		return $this->posts;

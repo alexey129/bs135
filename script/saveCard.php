@@ -1,15 +1,9 @@
 <?php
-$_POST = json_decode(file_get_contents('php://input'), true);
-$nameInput = $_POST['name'];
-$contentInput = $_POST['content'];
-$idInput = $_POST['id'];
-$dbconn = pg_connect("host=localhost
-					  port=5432
-					  dbname=bs135
-					  user=postgres
-					  password=password
-					");
+require_once '../config.php';
+require_once BS_SITE_PATH . '/function.php';
 
-$sql = "UPDATE cards SET name='" . $nameInput . "', content='" . $contentInput . "' WHERE id='" . $idInput . "'";
-$result = pg_query($dbconn, $sql);
+$_POST = json_decode(file_get_contents('php://input'), true);
+$dbconn = mysqli_connect(HOST, USER, PASSWORD, DBNAME);
+
+$posts = saveCard($_POST['name'], $_POST['content'], $_POST['id']);
 ?>

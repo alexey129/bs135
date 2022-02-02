@@ -13,14 +13,12 @@ class blogitemModel{
 	}
 
 	public function getPost($id){
-		global $dbconn;
-		$sql = 'SELECT id, name, content FROM posts';
-		$result = pg_query($dbconn, $sql);
-		while ($row = pg_fetch_row($result)) {
-			if($row[0] == $id){
+		$result = query("SELECT id, name, content FROM posts");
+		while ($row = fetch($result)) {
+			if($row["id"] == $id){
 				$item = new Post();
-				$item->name = $row[1];
-				$item->content = $row[2];
+				$item->name = $row["name"];
+				$item->content = $row["content"];
 				return $item;
 			}
 		}

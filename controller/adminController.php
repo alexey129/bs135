@@ -14,9 +14,9 @@ class adminController{
 	function isAutentification(){
 		global $dbconn;
 		$sql = 'SELECT name, password, isauth FROM users';
-		$result = pg_query($dbconn, $sql);
-		while ($row = pg_fetch_row($result)) {
-			if($row[2] == 'f'){
+		$result = mysqli_query($dbconn, $sql);
+		while ($row = mysqli_fetch_array($result)) {
+			if($row["isauth"] == false){
 				return false;
 			} else {
 				return true;
@@ -27,7 +27,7 @@ class adminController{
 
 	public function controller(){
 		if($this->isAutentification() == false){
-			header("Location: " . SITE_PATH . "error");
+			header("Location: " . BS_SITE_URL . "error");
 		};
 		$args = [];
 		$this->view->print($args);

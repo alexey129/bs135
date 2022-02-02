@@ -20,7 +20,7 @@ function roadmap($args){
             <?php
             foreach($args["cardlist"] as $value){
                 ?><a href="<?php
-                    echo SITE_PATH .
+                    echo BS_SITE_URL .
                     "roadmap?playlist=" . $_GET["playlist"] .
                     "&card=" . $value["id"]?>"
                     class="roadmap__sidebar-item">

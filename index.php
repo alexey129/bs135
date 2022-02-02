@@ -1,19 +1,13 @@
 <?php
 require_once './config.php';
-$dbconn = pg_connect("host=ec2-3-227-15-75.compute-1.amazonaws.com
-					  port=5432
-					  dbname=da0mrntn88a3vi
-					  user=fnhbktcfomqyqc
-					  password=ef91e3b2d02efa2c0cc9f6c243462f03aa66e63965241c5f1b424d0efc54fa74
-					");
+
+$dbconn = mysqli_connect(HOST, USER, PASSWORD, DBNAME);
 
 $IsAuthentification = "";
-$sql = 'SELECT name, isauth FROM users';
-$result = pg_query($dbconn, $sql);
-$IsAuthentification = "";
-while ($row = pg_fetch_row($result)) {
-	if($row[1] == 't'){
-		$IsAuthentification = $row[0];
+$result = mysqli_query($dbconn, "SELECT name, isauth FROM users");
+while ($row = mysqli_fetch_array($result)) {
+	if($row["isauth"] == "1"){
+		$IsAuthentification = $row["name"];
 	}
 }
 
